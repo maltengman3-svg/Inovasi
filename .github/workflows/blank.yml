@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inovasi Pelayanan Madrasah | SI-IPM</title>
+    
+    <!-- Font Google: Playfair Display (Elegan/Wibawa) & Lato (Modern/Bersih) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Ikon dari FontAwesome (CDN) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- VARIABEL & RESET --- */
+        :root {
+            /* Warna Utama */
+            --primary: #1b4d3e; /* Hijau Zamrud Tua - Berwibawa */
+            --primary-dark: #0f2e24;
+            --accent: #4caf50; /* Hijau Cerah - Aksen Modern */
+            --accent-light: #e8f5e9;
+            
+            /* Warna Netral */
+            --bg-body: #f8f9fa;
+            --bg-white: #ffffff;
+            --text-main: #333333;
+            --text-muted: #666666;
+            --border-color: #e0e0e0;
+
+            /* Dimensi & Efek */
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.05);
+            --shadow-md: 0 8px 24px rgba(27, 77, 62, 0.1);
+            --radius: 8px;
+            --container-width: 1200px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            line-height: 1.3;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s ease;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* --- UTILITY CLASSES --- */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 4px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 10px rgba(27, 77, 62, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .text-center { text-align: center; }
+        .text-white { color: white; }
+
+        /* --- STYLE UNTUK LOGO --- */
+        .logo-img {
+            height: 50px;
+            width: auto;
+            vertical-align: middle;
+            margin-right: 15px;
+            object-fit: contain;
+            /* Efek bayangan halus agar logo timbul */
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        /* --- NAVBAR --- */
+        header.navbar {
+            background-color: var(--bg-white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 3px solid var(--accent);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            position: relative;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background-image: url('https://picsum.photos/seed/arch/800/600'); 
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
+            mask-image: linear-gradient(to left, black, transparent);
+            -webkit-mask-image: linear-gradient(to left, black, transparent);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+        }
+
+        .badge {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 20px;
+            border: 1px solid rgba(76, 175, 80, 0.3);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        /* --- STATS SECTION --- */
+        .stats {
+            background-color: var(--bg-white);
+            margin-top: -40px;
+            position: relative;
+            z-index: 10;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            padding: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+            border-right: 1px solid var(--border-color);
+        }
+
+        .stat-item:last-child { border-right: none; }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- INNOVATION CARDS --- */
+        .section-title {
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--bg-white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border-top: 4px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-md);
+            border-top: 4px solid var(--accent);
+        }
+
+        .card-img {
+            height: 200px;
+            background-color: #ddd;
+            overflow: hidden;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover .card-img img {
+            transform: scale(1.05);
+        }
+
+        .card-body {
+            padding: 25px;
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .card-link {
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* --- INTERACTIVE TRACKING TOOL --- */
+        .tracker-section {
+            background-color: var(--primary-dark);
+            color: white;
+            position: relative;
+        }
+
+        .tracker-container {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: var(--radius);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .tracker-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .tracker-header h2 { color: white; }
+        .tracker-header p { color: rgba(255,255,255,0.7); }
+
+        .form-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .form-input {
+            flex: 1;
+            padding: 15px 20px;
+            border-radius: 4px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-family: 'Lato', sans-serif;
+            font-size: 1rem;
+            outline: none;
+            min-width: 250px;
+        }
+
+        .form-input::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .form-input:focus {
+            border-color: var(--accent);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .tracker-result {
+            margin-top: 30px;
+            padding: 20px;
+            background: white;
+            color: var(--text-main);
+            border-radius: var(--radius);
+            display: none; /* Hidden by default */
+            animation: fadeIn 0.5s ease;
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .status-process { background: #fff3e0; color: #f57c00; }
+        .status-success { background: #e8f5e9; color: #2e7d32; }
+
+        .timeline {
+            position: relative;
+            padding-left: 20px;
+            border-left: 2px solid var(--border-color);
+        }
+
+        .timeline-item {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -26px;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--primary);
+        }
+
+        /* --- TOAST NOTIFICATION --- */
+        #toast-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 2000;
+        }
+
+        .toast {
+            background: white;
+            border-left: 5px solid var(--primary);
+            padding: 15px 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border-radius: 4px;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transform: translateX(120%);
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            min-width: 300px;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast i {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .toast-content h4 {
+            font-size: 1rem;
+            margin-bottom: 2px;
+            font-family: 'Lato', sans-serif;
+            color: var(--primary-dark);
+        }
+
+        .toast-content p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #111;
+            color: #999;
+            padding: 60px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .footer-logo-img {
+            height: 70px;
+            width: auto;
+            margin-bottom: 15px;
+            /* Tambahkan sedikit filter agar terlihat bagus di background gelap */
+            filter: brightness(0.9); 
+        }
+
+        .footer-logo-text {
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .footer-links h4 {
+            color: white;
+            font-family: 'Lato', sans-serif;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            font-size: 0.85rem;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            .stat-item:nth-child(2) { border-right: none; }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links {
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+                display: none;
+            }
+            .nav-links.active { display: flex; }
+            .menu-toggle { display: block; }
+            
+            .form-group { flex-direction: column; }
+            .stats { grid-template-columns: 1fr; text-align: center; }
+            .stat-item { border-right: none; border-bottom: 1px solid var(--border-color); padding-bottom: 20px; margin-bottom: 20px; }
+            .stat-item:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+            
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="container">
+            <nav>
+                <!-- LOGO HEADER (Diperbarui) -->
+                <a href="#" class="logo">
+                    <img src="https://z-cdn-media.chatglm.cn/files/b9c903fe-5d4e-4bc8-bdee-eccea8ed8b00.PNG?auth_key=1870190704-dd8b4ebc37804ae7921ef6b902a29b41-0-fb67a5d62f0c1e58ab771b914cb9f782" 
+                         class="logo-img" 
+                         alt="Logo MAN 3 Maluku Tengah">
+                    INOVASI MADRASAH
+                </a>
+                <div class="menu-toggle" id="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home" class="active">Beranda</a></li>
+                    <li><a href="#stats">Kinerja</a></li>
+                    <li><a href="#innovations">Program Unggulan</a></li>
+                    <li><a href="#tracker">Layanan Online</a></li>
+                    <li><a href="#contact">Kontak</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <span class="badge">Kementerian Agama RI</span>
+                <h1>Transformasi Digital Pelayanan Madrasah</h1>
+                <p>Mewujudkan pelayanan prima yang transparan, akuntabel, dan berbasis teknologi informasi untuk kemajuan pendidikan Islam.</p>
+                <div class="hero-btns">
+                    <a href="#innovations" class="btn btn-primary">Jelajahi Program</a>
+                    <a href="#tracker" class="btn btn-outline" style="color: white; border-color: white;">Cek Status Layanan</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS SECTION -->
+    <div class="container">
+        <div class="stats" id="stats">
+            <div class="stat-item">
+                <span class="stat-number" data-target="150">0</span>
+                <span class="stat-label">Madrasah Digital</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="5000">0</span>
+                <span class="stat-label">Guru Terlatih</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="98">0%</span>
+                <span class="stat-label">Indeks Kepuasan</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="24">0/7</span>
+                <span class="stat-label">Jam Akses Layanan</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- INNOVATION CARDS -->
+    <section class="section-padding" id="innovations">
+        <div class="container">
+            <div class="section-title">
+                <h2>Inovasi Unggulan</h2>
+                <p>Berbagai terobosan kreatif untuk meningkatkan mutu layanan pendidikan di lingkungan madrasah.</p>
+            </div>
+
+            <div class="grid-cards">
+                <!-- Card 1 -->
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://picsum.photos/seed/tech1/400/300" alt="Simkah">
+                    </div>
+                    <div class="card-body">
+                        <i class="fas fa-laptop-code card-icon"></i>
+                        <h3>SIMPATIKA</h3>
+                        <p>Sistem Informasi Pendataan Peserta Didik, Guru, dan Tenaga Kependidikan yang terintegrasi secara nasional.</p>
+                        <a href="#" class="card-link">Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://picsum.photos/seed/edu2/400/300" alt="RKM">
+                    </div>
+                    <div class="card-body">
+                        <i class="fas fa-chart-line card-icon"></i>
+                        <h3>E-Kinerja Guru</h3>
+                        <p>Aplikasi penilaian kinerja guru berbasis kompetensi dan produktivitas secara transparan dan objektif.</p>
+                        <a href="#" class="card-link">Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://picsum.photos/seed/arch3/400/300" alt="Madrasah Hebat">
+                    </div>
+                    <div class="card-body">
+                        <i class="fas fa-mosque card-icon"></i>
+                        <h3>Madrasah Mengaji</h3>
+                        <p>Program unggulan untuk memperkuat profil pelajar pesantren dan kegiatan keagamaan di madrasah.</p>
+                        <a href="#" class="card-link">Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE TRACKING TOOL -->
+    <section class="section-padding tracker-section" id="tracker">
+        <div class="container">
+            <div class="tracker-container">
+                <div class="tracker-header">
+                    <h2><i class="fas fa-search"></i> Tracking Layanan Online</h2>
+                    <p>Pantau status pengajuan izin, sertifikasi, atau administrasi Anda secara real-time.</p>
+                </div>
+                
+                <form id="trackingForm">
+                    <div class="form-group">
+                        <input type="text" id="ticketId" class="form-input" placeholder="Masukkan Nomor Tiket / NIK Anda..." required>
+                        <button type="submit" class="btn btn-primary" style="background-color: var(--accent); color: white;">Lacak Sekarang</button>
+                    </div>
+                </form>
+
+                <!-- Hasil Pencarian -->
+                <div id="resultArea" class="tracker-result">
+                    <div class="result-header">
+                        <div>
+                            <h3 id="resTicket">Tiket #12345</h3>
+                            <small id="resDate">Diajukan: 20 Okt 2023</small>
+                        </div>
+                        <span class="status-badge status-process" id="resStatus">Sedang Diproses</span>
+                    </div>
+                    <p style="margin-bottom: 20px;">Layanan: <strong>Penerbitan Ijazah Pengganti</strong></p>
+                    
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <h4>Pengajuan Diterima</h4>
+                            <small class="text-muted">20 Okt 2023 - 09:00 WIB</small>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>Verifikasi Berkas</h4>
+                            <small class="text-muted">21 Okt 2023 - 10:30 WIB</small>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>Validasi Kemenag</h4>
+                            <small class="text-muted" style="color: #999;">Sedang berlangsung...</small>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about footer-logo-container">
+                    <!-- LOGO FOOTER (Diperbarui) -->
+                    <img src="https://z-cdn-media.chatglm.cn/files/b9c903fe-5d4e-4bc8-bdee-eccea8ed8b00.PNG?auth_key=1870190704-dd8b4ebc37804ae7921ef6b902a29b41-0-fb67a5d62f0c1e58ab771b914cb9f782" 
+                         class="footer-logo-img" 
+                         alt="Logo MAN 3 Maluku Tengah">
+                    
+                    <a href="#" class="footer-logo-text">INOVASI MADRASAH</a>
+                    <p>Portal resmi informasi dan layanan digital untuk mendukung visi misi madrasah yang mandiri, berprestasi, dan berakhlak mulia.</p>
+                    <div style="margin-top: 20px;">
+                        <i class="fab fa-facebook fa-lg" style="margin-right: 15px; cursor: pointer;"></i>
+                        <i class="fab fa-twitter fa-lg" style="margin-right: 15px; cursor: pointer;"></i>
+                        <i class="fab fa-instagram fa-lg" style="margin-right: 15px; cursor: pointer;"></i>
+                        <i class="fab fa-youtube fa-lg" style="cursor: pointer;"></i>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Tautan Cepat</h4>
+                    <ul>
+                        <li><a href="#">Profil Madrasah</a></li>
+                        <li><a href="#">Berita Terkini</a></li>
+                        <li><a href="#">Regulasi</a></li>
+                        <li><a href="#">Pengaduan Masyarakat</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Hubungi Kami</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt" style="width: 20px;"></i> Jl. MH. Thamrin, Jakarta</li>
+                        <li><i class="fas fa-phone" style="width: 20px;"></i> (021) 123-4567</li>
+                        <li><i class="fas fa-envelope" style="width: 20px;"></i> info@madrasah.go.id</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 Inovasi Pelayanan Madrasah. All Rights Reserved. Designed with Professionalism.
+            </div>
+        </div>
+    </footer>
+
+    <!-- TOAST CONTAINER -->
+    <div id="toast-container"></div>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // 1. Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // 2. Animated Numbers (Stats)
+        const stats = document.querySelectorAll('.stat-number');
+        let hasAnimatedStats = false;
+
+        const animateStats = () => {
+            stats.forEach(stat => {
+                const target = +stat.getAttribute('data-target');
+                const suffix = stat.innerText.replace(/[0-9]/g, ''); // Get suffix like % or /
+                const increment = target / 50; // Speed control
+
+                const updateCount = () => {
+                    const count = +stat.innerText.replace(/[^0-9]/g, '');
+                    if (count < target) {
+                        stat.innerText = Math.ceil(count + increment) + suffix;
+                        setTimeout(updateCount, 30);
+                    } else {
+                        stat.innerText = target + suffix;
+                    }
+                };
+                updateCount();
+            });
+        };
+
+        // Trigger animation when stats section is in view
+        const statsSection = document.getElementById('stats');
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting && !hasAnimatedStats) {
+                animateStats();
+                hasAnimatedStats = true;
+            }
+        });
+        observer.observe(statsSection);
+
+        // 3. Tracking Simulation Logic
+        const trackingForm = document.getElementById('trackingForm');
+        const resultArea = document.getElementById('resultArea');
+        const ticketInput = document.getElementById('ticketId');
+
+        trackingForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simulasi Loading
+            const btn = this.querySelector('button');
+            const originalText = btn.innerText;
+            btn.innerText = 'Mencari...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                // Reset tombol
+                btn.innerText = originalText;
+                btn.disabled = false;
+
+                // Tampilkan Result Area (Mockup Logic)
+                // Dalam aplikasi nyata, ini akan fetch ke API
+                const ticketVal = ticketInput.value;
+                if(ticketVal.trim() === "") {
+                    showToast("Error", "Mohon masukkan nomor tiket.", "error");
+                    return;
+                }
+
+                // Update UI hasil dengan input user biar terasa real
+                document.getElementById('resTicket').innerText = `Tiket #${ticketVal}`;
+                resultArea.style.display = 'block';
+                
+                // Scroll ke hasil
+                resultArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+                showToast("Berhasil", "Data tiket ditemukan.", "success");
+
+            }, 1500); // Delay simulasi 1.5 detik
+        });
+
+        // 4. Custom Toast Notification System (Pengganti Alert)
+        function showToast(title, message, type) {
+            const container = document.getElementById('toast-container');
+            
+            // Buat elemen toast
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            
+            // Tentukan ikon berdasarkan tipe
+            let iconClass = 'fa-info-circle';
+            let colorClass = 'var(--primary)';
+            
+            if (type === 'success') {
+                iconClass = 'fa-check-circle';
+                toast.style.borderLeftColor = '#4caf50';
+            } else if (type === 'error') {
+                iconClass = 'fa-exclamation-circle';
+                toast.style.borderLeftColor = '#f44336';
+            }
+
+            toast.innerHTML = `
+                <i class="fas ${iconClass}" style="color: ${type === 'error' ? '#f44336' : 'var(--primary)'}"></i>
+                <div class="toast-content">
+                    <h4>${title}</h4>
+                    <p>${message}</p>
+                </div>
+            `;
+
+            container.appendChild(toast);
+
+            // Trigger animasi masuk
+            requestAnimationFrame(() => {
+                toast.classList.add('show');
+            });
+
+            // Hapus setelah 3 detik
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => {
+                    toast.remove();
+                }, 400); // Tunggu animasi keluar
+            }, 3000);
+        }
+
+        // 5. Smooth Scroll untuk Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                navLinks.classList.remove('active'); // Tutup menu mobile jika terbuka
+                
+                // Update icon menu
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
